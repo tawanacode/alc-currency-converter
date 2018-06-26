@@ -1,0 +1,34 @@
+
+body {
+  background-image: linear-gradient(to right top, #b70525, #d04819, #e17601, #eaa300, #ebcf12);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-attachment: fixed;
+}
+  
+h1{
+  color:rgba(0,0,0,0.3);
+}
+
+.input-group-lg .form-control{
+  padding-left:2rem;
+}
+
+.card, .btn{
+  border:0;
+  box-shadow:1px 15px 20px 1px rgba(0,0,0,0.3);
+}
+
+.btn {
+  background: #845EC2;
+  color:white;
+  padding:1em 2em;
+  vertical-align:center;
+}
+
+.btn:hover, .btn:focus{
+  background-color:#FFC75F;
+  color:#845EC2;
+}
