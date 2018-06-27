@@ -9,13 +9,19 @@ body {
 }
   
 h1{
-  color:rgba(0,0,0,0.3);
+  color:rgba(255,255,255,0.1);
 }
 
 .input-group-lg .form-control{
   padding-left:2rem;
 }
 
+.card{
+  border:0;
+  box-shadow:1px 15px 20px 1px rgba(0,0,0,0.3);
+}
+
+/*
 .card, .btn{
   border:0;
   box-shadow:1px 15px 20px 1px rgba(0,0,0,0.3);
@@ -31,4 +37,4 @@ h1{
 .btn:hover, .btn:focus{
   background-color:#FFC75F;
   color:#845EC2;
-}
+} */
