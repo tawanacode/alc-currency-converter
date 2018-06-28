@@ -1,11 +1,8 @@
 (function () {
   'use strict';
   window.addEventListener('load', function () {
-
     const inputVal = document.querySelector("#inputValue");
     let select = document.querySelectorAll("select");
-    const fromSymbol = document.querySelector("#convertFromSymbol");
-    const toSymbol = document.querySelector("#convertToSymbol");
     const convertedVal = document.querySelector("#convertedValue");
 
     let convertFrom = document.querySelector("#convertFrom option[selected]");
@@ -32,30 +29,40 @@
         e.addEventListener("change", function (el) {
           //show the current country name in the select
           const selectId = el.target.previousElementSibling.firstElementChild.id;
-          const inputId = selectId.endsWith("To") ? "convertSymbolTo" : "convertSymbolFrom";
+          const suffix = selectId.endsWith("To") ? "To" : "From";
           
+          let options = el.target.options;
           const oldCurrencyVal = document.querySelector(`#${selectId}`);
-          const oldCurrencySymbol = document.querySelector(`#${inputId}`);
+          const oldCurrencySymbol = document.querySelector(`#convertSymbol${suffix}`);
 
           const newCurrencyVal = el.target.selectedOptions[0].value;
           const newCurrencySymbol = json.results[newCurrencyVal].currencySymbol;
 
           //update selected currency
-          //console.log(oldCurrencySymbol);
-         // console.log(newCurrencyVal.currencySymbol);
+            Array.prototype.forEach.call(options, function (e) {
+                if(e.hasAttribute("selected")){
+                    e.removeAttribute("selected");
+                }
+                if(e.value === newCurrencyVal){
+                    e.setAttribute("selected", " ");
+                }
+            });
+          
           oldCurrencyVal.innerHTML = newCurrencyVal;
-
+          if(suffix === "To"){
+             selectedConvertTo = document.querySelector(`#convert${suffix} option[selected]`).value;
+          }else {
+                selectedConvertFrom = document.querySelector(`#convert${suffix} option[selected]`).value;  
+              }
+            
           //show currency unit next to country
           oldCurrencySymbol.innerHTML = (newCurrencySymbol !== undefined) ? newCurrencySymbol : newCurrencyVal;
-
-          //convertBtn.click();
+            convertBtn.click();
         });
       });
     });
-
+      
     convertBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      console.log(selectedConvertFrom);
       fetch("https://free.currencyconverterapi.com/api/v5/convert?q=" + selectedConvertFrom + "_" + selectedConvertTo).then(function (response) {
         return response.json();
       }).then(function (json) {
@@ -64,5 +71,13 @@
         convertedVal.innerHTML = results;
       });
     });
+      
+    inputVal.addEventListener("keydown", function (e){
+      if(e.key === 'Enter'){//Enter key pressed
+          e.preventDefault();
+          convertBtn.click();//Trigger search button click event
+      }
+  });
+
   });
 })();

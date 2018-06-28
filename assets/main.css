@@ -1,6 +1,6 @@
 
 body {
-  background-image: linear-gradient(to right top,#e17601, #eaa300);
+  background-image: radial-gradient(#21706c, #60C4D7);
   background-attachment: fixed;
 }
 
@@ -9,7 +9,7 @@ body {
 }
   
 h1{
-    color: rgba(255,255,255,0.75);
+    color: rgba(0,0,0,0.4);
     font-weight:600;
     font-size:3em;
 }
@@ -35,7 +35,7 @@ label{
 
 .input-group:not(.inputValue) .input-group-text,
 .custom-select{
-  font-size:1.2rem;
+  font-size:0.9rem;
 }
 
 .input-group:not(.inputValue) .input-group-text:after{
@@ -48,10 +48,9 @@ label{
     border-bottom:1px solid #ccc;
 }
 
-
 .convertedValue, .form-control, 
 .inputValue .input-group-text{
-    font-size: 3em;   
+    font-size: 2em;   
     color: #555;
 }
 
@@ -65,11 +64,13 @@ label{
   padding-left:5px;
 }
 
-.card, .btn{
+.card, 
+.btn{
   border:0;
   box-shadow:1px 15px 20px 1px rgba(0,0,0,0.3);
 }
 
+.card-header,
 .card-footer{
   background: 0;
   border: 0;
