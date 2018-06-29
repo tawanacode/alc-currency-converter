@@ -3,17 +3,19 @@ layout: default
 title: Currency Converter 
 ---
 
-<div class="container">
-  <div class="row align-items-center justify-content-center">
+<div class="container h-100">
+  <div class="row align-items-center justify-content-center h-100">
     <div class="col-lg-8 col-xs-10">
-      <div class="card px-5 pt-3 mt-5">
-      <div class="card-header">
-          <h1 class="text-center">{{ page.title }}</h1>
-          </div>
-        <div class="card-body  pb-3">
-          <form>
+      <div class="card px-5">
+        <div class="card-header  pb-5 pt-5">
+          <h1 class="text-center text-uppercase">
+              <i class="fas fa-chart-line fa-fw"></i>
+            {{ page.title }}
+          </h1>
+        </div>
+        <div class="card-body pb-3">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12 col-xl-6">
               <label for="convertFrom">From</label>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -24,7 +26,7 @@ title: Currency Converter
                 </select>
               </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12 col-xl-6">
               <label for="convertTo">To</label>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -36,29 +38,35 @@ title: Currency Converter
               </div>
             </div>
           </div>
-          <div class="row align-items-center mt-4 mb-3">
-            <div class="col-lg-6">
+          <div class="row align-items-center pt-5 pb-3">
+            <div class="col-lg-12 col-xl-6">
               <div class="input-group inputValue">
                 <div class="input-group-prepend ">
-                  <label for="inputValue" class="input-group-text" id="convertSymbolFrom">$</label> 
+                  <label for="inputValue" class="input-group-text" id="convertSymbolFrom">$</label>
                 </div>
-                <input type="number" autofocus="autofocus" id="inputValue" class="form-control" min="0" required>
+                <input type="number" autofocus="autofocus" id="inputValue" class="form-control" min="0" placeholder="0" required>
               </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-12 col-xl-6">
               <div class="convertedValue">
                 <span id="convertSymbolTo">P</span>
                 <span id="convertedValue">0.00</span>
               </div>
             </div>
           </div>
-          </form>
+          <div class=" text-center pt-5 pb-3">
+
+            <button id="convertBtn" class="btn btn-primary btn-block btn-lg text-uppercase" type="submit">
+                <i class="fas fa-retweet fa-fw"></i>
+              convert
+            </button>
+          </div>
         </div>
-        <div class="card-footer pb-5">
-          <button id="convertBtn" class="btn btn-primary btn-lg btn-block" type="submit">convert
-            <i class="fas fa-exchange-alt fa-fw"></i>
-          </button>
+        <div class="card-footer pb-3">
+          <p class="text-center">created with
+            <i class="fas fa-coffee fa-fw"></i>
+          </p>
         </div>
       </div>
     </div>

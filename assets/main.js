@@ -12,7 +12,7 @@
     let selectedConvertTo = convertTo.value;
     const convertBtn = document.querySelector("#convertBtn");
 
-    //console.log(select);
+    console.log(inputVal.value);
     fetch("https://free.currencyconverterapi.com/api/v5/currencies").then(function (response) {
       return response.json();
     }).then(function (json) {
@@ -30,7 +30,7 @@
           //show the current country name in the select
           const selectId = el.target.previousElementSibling.firstElementChild.id;
           const suffix = selectId.endsWith("To") ? "To" : "From";
-          
+
           let options = el.target.options;
           const oldCurrencyVal = document.querySelector(`#${selectId}`);
           const oldCurrencySymbol = document.querySelector(`#convertSymbol${suffix}`);
@@ -39,45 +39,47 @@
           const newCurrencySymbol = json.results[newCurrencyVal].currencySymbol;
 
           //update selected currency
-            Array.prototype.forEach.call(options, function (e) {
-                if(e.hasAttribute("selected")){
-                    e.removeAttribute("selected");
-                }
-                if(e.value === newCurrencyVal){
-                    e.setAttribute("selected", " ");
-                }
-            });
-          
+          Array.prototype.forEach.call(options, function (e) {
+            if (e.hasAttribute("selected")) {
+              e.removeAttribute("selected");
+            }
+            if (e.value === newCurrencyVal) {
+              e.setAttribute("selected", " ");
+            }
+          });
+
           oldCurrencyVal.innerHTML = newCurrencyVal;
-          if(suffix === "To"){
-             selectedConvertTo = document.querySelector(`#convert${suffix} option[selected]`).value;
-          }else {
-                selectedConvertFrom = document.querySelector(`#convert${suffix} option[selected]`).value;  
-              }
-            
+          if (suffix === "To") {
+            selectedConvertTo = document.querySelector(`#convert${suffix} option[selected]`).value;
+          } else {
+            selectedConvertFrom = document.querySelector(`#convert${suffix} option[selected]`).value;
+          }
+
           //show currency unit next to country
           oldCurrencySymbol.innerHTML = (newCurrencySymbol !== undefined) ? newCurrencySymbol : newCurrencyVal;
-            convertBtn.click();
+          convertBtn.click();
         });
       });
     });
-      
+
     convertBtn.addEventListener("click", function (e) {
       fetch("https://free.currencyconverterapi.com/api/v5/convert?q=" + selectedConvertFrom + "_" + selectedConvertTo).then(function (response) {
         return response.json();
       }).then(function (json) {
+        console.log(selectedConvertFrom, selectedConvertTo);
         const exchangeRate = json.results[`${selectedConvertFrom}_${selectedConvertTo}`].val;
-        const results = Number.parseFloat(exchangeRate * inputVal.value).toFixed(2);
-        convertedVal.innerHTML = results;
+        const results = Number.parseFloat(exchangeRate * (inputVal.value).replace(/\s/,"")).toFixed(2);
+        convertedVal.innerHTML = results.toLocaleString('i');
+        
       });
     });
-      
-    inputVal.addEventListener("keydown", function (e){
-      if(e.key === 'Enter'){//Enter key pressed
-          e.preventDefault();
-          convertBtn.click();//Trigger search button click event
+
+    inputVal.addEventListener("keydown", function (e) {
+      if (e.key === 'Enter') {//Enter key pressed
+        e.preventDefault();
+        convertBtn.click();//Trigger search button click event
       }
-  });
+    });
 
   });
 })();
