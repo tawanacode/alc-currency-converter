@@ -11,15 +11,17 @@ body {
 }
 
 h1{
-    color: rgb(91, 181, 207);
+    color: rgb(35, 127, 154);
     font-weight:700;
     font-size:2.7em;
     font-family: 'Jura', sans-serif;
 }
 
 label{
-  color: rgba(0,0,0,0.4);
-  font-size:0.9rem;
+  color: #555;
+    border:1px solid blue;
+  font-size:0.8rem; 
+  margin:0;
 }
 
 .form-control,
@@ -48,7 +50,7 @@ label{
 
 .custom-select{
   font-weight: 300;
-    border-bottom:1px solid #ccc;
+  border-bottom:1px solid #ccc;
 }
 
 .convertedValue, 
@@ -64,13 +66,13 @@ label{
 .inputValue .input-group-text, 
 .form-control{
   padding-right:5px;
-  color:#999;
+  color:#666;
 }
 
 .form-control{
   padding-left:5px;
 }
-
+ 
 .card, 
 .btn{
   border:0;
@@ -85,8 +87,8 @@ label{
 
 .btn, 
 .btn:focus {
-  background: #49A933;
-  color: rgba(255,255,255,0.8);
+  background: #347b24; 
+  color: rgba(255,255,255,1);
   padding:1em 2em;
   letter-spacing: 2px;
   font-weight: 700;
@@ -94,7 +96,7 @@ label{
 
 .btn:hover, 
 .btn:active{
-  background-color:#2B7A19;
+  background-color:#1e5810;
 }
 
 .btn:focus, 

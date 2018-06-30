@@ -1,0 +1,12 @@
+{
+  "name": "Currency Converter",
+  "short_name": "converter",
+  "scope": "/",
+  "icons": [{
+    "src": "/imgs/icon.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  }],
+  "display": "standalone",
+  "start_url": "/"
+}
