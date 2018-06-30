@@ -3,11 +3,11 @@ body {
   background-image: radial-gradient( #60C4D7, #2e708b);
   background-attachment: fixed;
   font-family: 'Poppins', sans-serif;
-  font-weight: 400;
+    font-weight: 400;
 }
 
 .wrapper{
-  height: 100vh;
+    height: 100vh;
 }
 
 h1{
@@ -17,9 +17,9 @@ h1{
     font-family: 'Jura', sans-serif;
 }
 
-label{
+label{ 
   color: #555;
-    border:1px solid blue;
+  border:1px solid red;
   font-size:0.8rem; 
   margin:0;
 }
