@@ -1,20 +1,21 @@
-var staticCacheName = 'v1';
+var staticCacheName = 'v3';
 
 self.addEventListener('install', function(e) {
     e.waitUntil(
     caches.open(staticCacheName).then(function(cache) {
       return cache.addAll([
-          './',
+        './',
         'assets/main.js',
         'assets/main.css',
         'favicon.ico',
+        'icon.png',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css',
         'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
         'https://fonts.googleapis.com/css?family=Jura|Poppins:300,400,700'
       ]);
     })
   );
-});
+});    
 
 self.addEventListener('activate', function(e) {
   e.waitUntil(
