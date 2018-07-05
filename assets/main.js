@@ -323,8 +323,9 @@
     const convertedVal = document.querySelector("#convertedValue");
     const convertBtn = document.querySelector("#convertBtn");
 
-    console.log(inputVal.value);
+    //console.log(inputVal.value);
     //check for support
+
     if (!('indexedDB' in window)) {
       console.log('This browser doesn\'t support IndexedDB');
       return;
@@ -333,19 +334,18 @@
     var dbPromise = idb.open('converterDB', 1, function (upgradeDb) {
 
       if (!upgradeDb.objectStoreNames.contains('currencies')) {
-        var currencyOS = upgradeDb.createObjectStore('currencies', { keyPath: 'currencyName' });
+        const currencyOS = upgradeDb.createObjectStore('currencies', { keyPath: 'currencyName' });
         currencyOS.createIndex('country', 'currencyName');
         currencyOS.createIndex('symbol', 'currencySymbol');
         currencyOS.createIndex('id', 'id');
       }
-
-      if (!upgradeDb.objectStoreNames.contains('rates')) {
-        var currencyOS = upgradeDb.createObjectStore('rates', { keyPath: 'id' });
-        currencyOS.createIndex('id', 'id');
-      }
     });
 
-    fetch("https://free.currencyconverterapi.com/api/v5/currencies").then(function (response) {
+    const request = new Request('https://free.currencyconverterapi.com/api/v5/currencies', {
+      mode: 'cors'
+    });
+
+    fetch(request).then(function (response) {
       return response.json();
     }).then(function (json) {
       //populate database with countries and currencies
@@ -364,14 +364,26 @@
 
         return currencyStore.getAll();
       }).then(function (currencies) {
-        //populate select dropdowns with option elements
+
+        //create a rates object
         Array.prototype.forEach.call(select, function (e) {
+
+          const selectId = e.id;
+          const suffix = selectId.endsWith("To") ? "To" : "From";
+          let currentID = document.querySelector(`#convertCode${suffix}`);
+          let currentSymbol = document.querySelector(`#convertSymbol${suffix}`);
+
+          //populate select dropdowns with option elements
           currencies.forEach(function (currency) {
             let option = document.createElement("option");
+            let dataSymbol = (currency.symbol !== undefined) ? currency.symbol : currency.id;
+
             option.text = currency.currencyName;
             option.value = currency.id;
+            option.setAttribute("data-symbol", dataSymbol);
             e.appendChild(option);
 
+            //set default selected values
             if (e.id === "convertFrom") {
               if (option.value === 'USD') {
                 option.setAttribute("selected", "");
@@ -381,76 +393,40 @@
                 option.setAttribute("selected", "");
               }
             }
+          });
 
           e.addEventListener("change", function (el) {
-            //show the current country name in the select
-            const selectId = e.id;
-            const suffix = selectId.endsWith("To") ? "To" : "From";
-            //console.log(el.path[1].firstElementChild.textContent.trim());
-            let options = el.target.options;
-            let currentID = document.querySelector(`#convertCode${suffix}`);
-            let currentSymbol = document.querySelector(`#convertSymbol${suffix}`);
-            
+
+            let options = el.target.options; //find all the options values
 
             Array.prototype.forEach.call(options, function (option) {
-              if (option.hasAttribute("selected")) {
-                option.removeAttribute("selected");//console.log(option);
+              if (option.hasAttribute("selected")) { //look for previously selected option
+                option.removeAttribute("selected");  //remove the 'seleced' flag
               }
-              if (option.selected == true) {
-                option.setAttribute("selected", " ");
-                currentID.innerHTML = option.value;
+              if (option.selected == true) { //check to see if this is the selected option
+                option.setAttribute("selected", ""); //mark otion as selected
+                currentID.innerHTML = option.value; //update currency value
+                currentSymbol.innerHTML = option.dataset.symbol; //update currency symbol
               }
             });
-console.log(currency.id);
-            currentSymbol.innerHTML = currency.id;
-
-            // oldCurrencyVal.innerHTML = newCurrencyVal;
-            //if (suffix === "To") {
-            //selectedConvertTo = document.querySelector(`#convert${suffix} option.selected`).value;
-            //} else {
-            //selectedConvertFrom = document.querySelector(`#convert${suffix} option.selected`).value;
-            // }
-
-            //show currency unit next to country
-            //oldCurrencySymbol.innerHTML = (newCurrencySymbol !== undefined) ? newCurrencySymbol : newCurrencyVal;
             convertBtn.click();
           });
         });
-        });
-        //convertBtn.addEventListener("click", function (e) {
-        fetch("https://free.currencyconverterapi.com/api/v5/convert?q=" + selectedConvertFrom + "_" + selectedConvertTo).then(function (response) {
-          return response.json();
-        }).then(function (json) {
-          const data = json.results;
-          dbPromise.then(function (db) {
-            const tx = db.transaction('rates', 'readwrite');
-            const ratesStore = tx.objectStore('rates');
-
-            for (let prop in data) {
-              ratesStore.put({
-                id: data[prop].id
-              });
-            }
-
-            return ratesStore.getAll();
-          }).then(function (rates) {
-            console.log(rates);
-            currencies.forEach(function (currency) {
-
-              console.log(currency.id);
-            });
-          });
-
-          // console.log(json, selectedConvertFrom, selectedConvertTo);
-          const exchangeRate = json.results[`${selectedConvertFrom}_${selectedConvertTo}`].val;
-          const results = Number.parseFloat(exchangeRate * (inputVal.value).replace(/\s/, "")).toFixed(2);
-          //  convertedVal.innerHTML = results.toLocaleString('i');
-
-        });
-        //});
       });
     });
 
+    convertBtn.addEventListener("click", function () {
+      const selectFrom = document.querySelector("#convertFrom option[selected]").value;
+      const selectTo = document.querySelector("#convertTo option[selected]").value;
+
+      fetch(`https://free.currencyconverterapi.com/api/v5/convert?q=${selectFrom}_${selectTo}&compact=ultra`).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        const exchangeRate = json[`${selectFrom}_${selectTo}`];
+        const results = Number.parseFloat(exchangeRate * (inputVal.value).replace(/\s/, "")).toFixed(2);
+        convertedVal.innerHTML = results.toLocaleString('i');
+      });
+    });
 
     inputVal.addEventListener("keydown", function (e) {
       if (e.key === 'Enter') {//Enter key pressed
@@ -458,6 +434,5 @@ console.log(currency.id);
         convertBtn.click();//Trigger search button click event
       }
     });
-
   });
 })();

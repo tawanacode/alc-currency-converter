@@ -2,11 +2,20 @@
   "name": "Currency Converter",
   "short_name": "converter",
   "scope": "/",
-  "icons": [{
-    "src": "/imgs/icon.png",
-    "sizes": "128x128",
-    "type": "image/png"
-  }],
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
   "display": "standalone",
-  "start_url": "/"
+  "start_url": "/",
+  "background_color": "rgb(35, 127, 154)",
+  "theme_color": "rgb(35, 127, 154)"
 }

@@ -9,6 +9,7 @@ self.addEventListener('install', function(e) {
         'assets/main.css',
         'favicon.ico',
         'icon.png',
+        'icon-512.png',
         'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css',
         'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
         'https://fonts.googleapis.com/css?family=Jura|Poppins:300,400,700'
@@ -77,19 +78,3 @@ self.addEventListener('fetch', function(e) {
       })
     );
 });
-//self.addEventListener('fetch', function(e) {
- // var requestUrl = new URL(e.request.url);
-
-  //if (requestUrl.origin === location.origin) {
-    //if (requestUrl.pathname === '/') {
-      //event.respondWith(caches.match('/skeleton'));
-      //return;
-//    }
-  //}
-
-//  e.respondWith(
-  //  caches.match(e.request).then(function(response) {
-    //  return response || fetch(e.request);
-//    })
-//  );
-//});
