@@ -341,7 +341,7 @@
       }
     });
 
-    const request = new Request('https://free.currencyconverterapi.com/api/v5/currencies', {
+    const request = new Request('https://free.currencyconverterapi.com/api/v6/currencies?apiKey=0c189bdeffd156118414', {
       mode: 'cors'
     });
 
@@ -419,7 +419,7 @@
       const selectFrom = document.querySelector("#convertFrom option[selected]").value;
       const selectTo = document.querySelector("#convertTo option[selected]").value;
 
-      fetch(`https://free.currencyconverterapi.com/api/v5/convert?q=${selectFrom}_${selectTo}&compact=ultra`).then(function (response) {
+      fetch(`https://free.currencyconverterapi.com/api/v6/convert?q=${selectFrom}_${selectTo}&compact=ultra&apiKey=0c189bdeffd156118414`).then(function (response) {
         return response.json();
       }).then(function (json) {
         const exchangeRate = json[`${selectFrom}_${selectTo}`];
