@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: ALC Project - Currency Converter
-email: your-email@example.com
+email: info@tawanacode.com
 description: >- # this means to ignore newlines until "baseurl:"
   an assignment project for the ALC google 
   scholarship program
@@ -22,9 +22,9 @@ description: >- # this means to ignore newlines until "baseurl:"
   
 # Build settings
 markdown: kramdown
-theme: minima
-plugins:
-  - jekyll-feed
+#theme: minima
+#plugins:
+#  - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

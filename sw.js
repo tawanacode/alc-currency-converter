@@ -1,5 +1,5 @@
-var staticCacheName = 'v3';
-
+var staticCacheName = 'v5;
+ 
 self.addEventListener('install', function(e) {
     e.waitUntil(
     caches.open(staticCacheName).then(function(cache) {
@@ -10,7 +10,7 @@ self.addEventListener('install', function(e) {
         'favicon.ico',
         'icon.png',
         'icon-512.png',
-        'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css',
+        'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',
         'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
         'https://fonts.googleapis.com/css?family=Jura|Poppins:300,400,700'
       ]);
