@@ -1,4 +1,4 @@
-## Alc Currency Converter
+# Alc Currency Converter
 
 Welcome to the project page
 
