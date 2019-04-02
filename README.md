@@ -2,34 +2,45 @@
 
 Welcome to the project page
 
-### Markdown
+## #7DaysofCodeChallenge
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Sunday, 24th June, 2018 to Sunday, 1st July, 2018
 
-```markdown
-Syntax highlighted code block
+### Mobile Web Specialist  Track
 
-# Header 1
-## Header 2
-### Header 3
+**What is Andela Learning Community (ALC) #7DaysofCodeChallenge?**
 
-- Bulleted
-- List
+7 Days of Code Challenge is an individual project/program completion task for the ALC learners. The goal is to
+determine your overall progress in the ALC program, and identify the top 100 learners from this track
+To test the skills learned by learners and certify the top learners at the end of the program.
 
-1. Numbered
-2. List
+**Project name: Currency Converter**
 
-**Bold** and _Italic_ and `Code` text
+Note: We expect that you must have completed your Udacity course to be able to fully understand and take this challenge.
 
-[Link](url) and ![Image](src)
-```
+**Introduction:**
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Freecurrencyconverterapi is an API that converts one currency to another and returns result in json format.
+You are required to implement a front-end application that takes advantage of the functionalities Freecurrencyconverterapi provides. The application should be able convert one currency to another while offline or online.
 
-### Jekyll Themes
+**Requirements:**
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/tawanacode/alc-currency-converter/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+* All Javascript MUST be written in ES6
+* Use Github repository for version control.
+* Host a working version of the application on Github-Pages.
+* The application must make use of the following
+  * Service Worker
+  * Cache API
+  * IndexedDB
+* You are not to use any service worker library
+* Submit your completed project at http://bit.ly/7daysofcode 
 
-### Support or Contact
+## Application Functions
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+At minimum users should be able to:
+* Select currencies to be converted from and to
+* Convert currencies while the application is online or offline
+
+## API Specification
+* Base URL: https://www.currencyconverterapi.com
+* Documentation: https://www.currencyconverterapi.com/docs
